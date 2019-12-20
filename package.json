@@ -1,0 +1,33 @@
+{
+  "name": "tamtam-bot-api",
+  "version": "0.0.2-0",
+  "description": "TamTam Bot API",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "rollup -c",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepublish": "npm run build"
+  },
+  "homepage": "https://github.com/twister55/tamtam-bot-api#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/twister55/tamtam-bot-api"
+  },
+  "keywords": [
+    "tamtam",
+    "bot",
+    "api",
+    "messenger"
+  ],
+  "author": "Vadim Yelisseyev",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "axios": "^0.19.0"
+  },
+  "devDependencies": {
+    "rollup": "^1.11.3",
+    "rollup-plugin-typescript2": "^0.21.0",
+    "typescript": "^3.7.3"
+  }
+}
