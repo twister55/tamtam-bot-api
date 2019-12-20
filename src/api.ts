@@ -25,7 +25,7 @@ export class TamTamBotAPI {
         this.client = new HttpClient(HOST, token, VERSION);
     }
 
-    public me(): Promise<BotInfo> {
+    public getBotInfo(): Promise<BotInfo> {
         return this.client.get('me');
     }
 
