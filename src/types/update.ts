@@ -30,17 +30,10 @@ export const enum UpdateType {
     MESSAGE_CONSTRUCTED = 'message_constructed',
     MESSAGE_CHAT_CREATED = 'message_chat_created',
     USER_ADDED = 'user_added',
-    USER_REMOVED = 'user_removed',
+    USER_REMOVED = 'user_removed'
 }
 
-export interface UpdateParams {
-    limit?: number;
-    timeout?: number;
-    marker?: number;
-    types?: UpdateType[];
-}
-
-export interface UpdateList {
+export interface Updates {
     updates: Update[];
     marker: number;
 }
@@ -158,16 +151,11 @@ export interface MessageConstructionRequestUpdate {
  */
 export type ConstructorInput = CallbackConstructorInput | MessageConstructorInput;
 
-export const enum ConstructorInputType {
-    CALLBACK = 'callback',
-    MESSAGE = 'message'
-}
-
 /**
  * Bot will get this input as soon as soon user taps on button created by bot in construction mode
  */
 export interface CallbackConstructorInput {
-    input_type: ConstructorInputType.CALLBACK;
+    input_type: 'callback';
     payload: string;
 }
 
@@ -179,7 +167,7 @@ export interface CallbackConstructorInput {
  * Can be empty on initial request when user just opened constructor
  */
 export interface MessageConstructorInput {
-    input_type: ConstructorInputType.MESSAGE;
+    input_type: 'message';
     messages: NewMessageBody[];
 }
 
@@ -220,7 +208,7 @@ export interface UserAddedToChatUpdate {
     chat_id: number;
     user: User;
     /**
-     * Can be `null` in case when user joined chat by link
+     * Can be undefined in case when user joined chat by link
      */
     inviter_id?: number;
     timestamp: number;
@@ -234,7 +222,7 @@ export interface UserRemovedFromChatUpdate {
     chat_id: number;
     user: User;
     /**
-     * Can be `null` in case when user left chat
+     * Can be undefined in case when user left chat
      */
     admin_id?: number;
     timestamp: number;

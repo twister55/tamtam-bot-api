@@ -6,13 +6,3 @@ export interface Subscription {
     update_types?: UpdateType[];
     version?: string;
 }
-
-export interface SubscriptionRequest {
-    url: string;
-    update_types?: UpdateType[];
-    version?: string;
-}
-
-export interface GetSubscriptionsResult {
-    subscriptions: Subscription[];
-}

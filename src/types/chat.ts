@@ -1,5 +1,4 @@
 import { User } from './user';
-import { ImageAttachmentRequestPayload } from './attachment';
 
 export interface Chat {
     chat_id: number;
@@ -65,11 +64,6 @@ export interface ChatList {
     marker?: number;
 }
 
-export interface ChatPatch {
-    icon?: ImageAttachmentRequestPayload;
-    title?: string;
-}
-
 export const enum ChatStatus {
     /**
      * bot is active member of chat
@@ -104,7 +98,7 @@ export interface ChatMember extends User {
     is_owner: boolean;
     is_admin: boolean;
     join_time: number;
-    permissions: ChatAdminPermission[] | null;
+    permissions?: ChatAdminPermission[];
 }
 
 export const enum ChatAdminPermission {
