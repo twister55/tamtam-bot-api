@@ -22,10 +22,10 @@ export interface GetMessagesParams {
 }
 
 export interface MessageList {
-    messages: Array<Message>;
+    messages: Message[];
 }
 
-export type Recipient = UserRecipient | ChatRecipient
+export type Recipient = UserRecipient | ChatRecipient;
 
 export interface UserRecipient {
     chat_type: ChatType.DIALOG;
@@ -77,5 +77,5 @@ export interface MessageBody {
     /**
      * Message attachments. Could be one of `Attachment` type. See description of this schema
      */
-    attachments?: Array<Attachment>;
+    attachments?: Attachment[];
 }

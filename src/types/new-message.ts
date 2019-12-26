@@ -19,7 +19,7 @@ export interface SendMessageResult {
 
 export interface NewMessageBody {
     text?: string;
-    attachments?: Array<AttachmentRequest>;
+    attachments?: AttachmentRequest[];
     link?: NewMessageLink;
     notify?: boolean;
 }

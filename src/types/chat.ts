@@ -61,7 +61,7 @@ export interface Dialog extends Chat {
 }
 
 export interface ChatList {
-    chats: Array<Chat>;
+    chats: Chat[];
     marker?: number;
 }
 
@@ -104,7 +104,7 @@ export interface ChatMember extends User {
     is_owner: boolean;
     is_admin: boolean;
     join_time: number;
-    permissions: Array<ChatAdminPermission> | null;
+    permissions: ChatAdminPermission[] | null;
 }
 
 export const enum ChatAdminPermission {
@@ -117,6 +117,6 @@ export const enum ChatAdminPermission {
 }
 
 export interface ChatMembersList {
-    members: Array<ChatMember>;
+    members: ChatMember[];
     marker?: number;
 }

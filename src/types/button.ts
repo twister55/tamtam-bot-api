@@ -2,7 +2,7 @@
 export type Button = CallbackButton | LinkButton | RequestContactButton | RequestGeoLocationButton | ChatButton;
 
 export interface Keyboard {
-    buttons: Array<Array<Button>>;
+    buttons: Button[][];
 }
 
 export const enum ButtonType {
