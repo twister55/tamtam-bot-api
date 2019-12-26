@@ -2,8 +2,8 @@ import axios, { AxiosError, AxiosResponse, Method } from 'axios';
 import { ApiError } from 'error';
 
 export interface RequestConfig {
-    params?: {},
-    data?: {},
+    params?: {};
+    data?: {};
 }
 
 export interface RequestError {

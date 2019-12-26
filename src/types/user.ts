@@ -8,5 +8,5 @@ export interface User {
 }
 
 export interface UserIdsList {
-    user_ids: Array<number>;
+    user_ids: number[];
 }

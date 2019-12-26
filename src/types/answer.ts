@@ -27,7 +27,7 @@ export interface ConstructorAnswer {
     /**
      * Array of prepared messages. This messages will be sent as user taps on \"Send\" button
      */
-    messages?: Array<NewMessageBody>;
+    messages?: NewMessageBody[];
     /**
      * If `true` user can send any input manually. Otherwise, only keyboard will be shown
      */

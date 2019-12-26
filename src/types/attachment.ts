@@ -1,7 +1,6 @@
 import { UploadedInfo } from './upload';
 import { User } from './user';
-import { Keyboard } from './button';
-import { Button } from './button';
+import { Button, Keyboard } from './button';
 
 export type Attachment = ImageAttachment |
                          VideoAttachment |
@@ -55,7 +54,7 @@ export interface AudioAttachment {
  * Request to attach audio to message. MUST be the only attachment in message
  */
 export interface AudioAttachmentRequest {
-    type: AttachmentType.AUDIO
+    type: AttachmentType.AUDIO;
     payload: UploadedInfo;
 }
 
@@ -113,7 +112,7 @@ export interface InlineKeyboardAttachmentRequest {
 }
 
 export interface InlineKeyboardAttachmentRequestPayload {
-    buttons: Array<Array<Button>>;
+    buttons: Button[][];
 }
 
 export interface LocationAttachment {

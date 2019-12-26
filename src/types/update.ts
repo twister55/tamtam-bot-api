@@ -15,7 +15,7 @@ export type Update = MessageCreatedUpdate |
                      MessageConstructedUpdate |
                      MessageChatCreatedUpdate |
                      UserAddedToChatUpdate |
-                     UserRemovedFromChatUpdate
+                     UserRemovedFromChatUpdate;
 
 export const enum UpdateType {
     MESSAGE_CREATED = 'message_created',
@@ -37,11 +37,11 @@ export interface UpdateParams {
     limit?: number;
     timeout?: number;
     marker?: number;
-    types?: UpdateType[]
+    types?: UpdateType[];
 }
 
 export interface UpdateList {
-    updates: Array<Update>;
+    updates: Update[];
     marker: number;
 }
 
@@ -180,9 +180,8 @@ export interface CallbackConstructorInput {
  */
 export interface MessageConstructorInput {
     input_type: ConstructorInputType.MESSAGE;
-    messages: Array<NewMessageBody>;
+    messages: NewMessageBody[];
 }
-
 
 /**
  * You will get this `update` as soon as message is created

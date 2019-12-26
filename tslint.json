@@ -1,0 +1,117 @@
+{
+  "extends": "tslint:recommended",
+  "rules": {
+    "file-name-casing": [
+      true,
+      "kebab-case"
+    ],
+    "no-require-imports": true,
+    "ordered-imports": [
+      true,
+      {
+        "import-sources-order": "any",
+        "named-imports-order": "any"
+      }
+    ],
+    "arrow-parens": [
+      true,
+      "ban-single-arg-parens"
+    ],
+    "max-line-length": {
+      "options": [
+        200
+      ]
+    },
+    "interface-name": [
+      true,
+      "never-prefix"
+    ],
+    "type-literal-delimiter": true,
+    "unified-signatures": false,
+    "no-arg": false,
+    "no-duplicate-imports": true,
+    "no-parameter-properties": true,
+    "no-redundant-jsdoc": true,
+    "no-this-assignment": true,
+    "no-boolean-literal-compare": true,
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "unnecessary-constructor": true,
+    "unnecessary-else": true,
+    "switch-final-break": [
+      true,
+      "always"
+    ],
+    "no-console": {
+      "severity": "warning",
+      "options": [
+        "debug",
+        "info",
+        "log",
+        "time",
+        "timeEnd",
+        "trace"
+      ]
+    },
+    "object-literal-sort-keys": false,
+    "trailing-comma": false,
+    "member-ordering": [
+      true,
+      {
+        "order": [
+          "public-static-field",
+          "private-static-field",
+          "public-instance-field",
+          "private-instance-field",
+          "public-constructor",
+          "private-constructor",
+          "public-instance-method",
+          "protected-instance-method",
+          "private-instance-method"
+        ],
+        "alphabetize": false
+      }
+    ],
+    "prefer-for-of": true,
+    "prefer-switch": [
+      true,
+      {
+        "min-cases": 2
+      }
+    ],
+    "prefer-template": [
+      true,
+      "allow-single-concat"
+    ],
+    "prefer-while": true,
+    "return-undefined": true
+  },
+  "jsRules": {
+    "max-line-length": {
+      "options": [
+        200
+      ]
+    },
+    "new-parens": true,
+    "no-arg": false,
+    "no-boolean-literal-compare": true,
+    "quotemark": [
+      true,
+      "single"
+    ],
+    "no-console": {
+      "severity": "warning",
+      "options": [
+        "debug",
+        "info",
+        "log",
+        "time",
+        "timeEnd",
+        "trace"
+      ]
+    },
+    "object-literal-sort-keys": false
+  }
+}

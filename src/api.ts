@@ -30,11 +30,11 @@ export class TamTamBotAPI {
     }
 
     public setBotInfo(patch: BotPatch): Promise<BotInfo> {
-        return this.client.patch('me', patch)
+        return this.client.patch('me', patch);
     }
 
     public getUpdates(params?: UpdateParams): Promise<UpdateList> {
-        return this.client.get('updates', params)
+        return this.client.get('updates', params);
     }
 
     public getSubscriptions(): Promise<GetSubscriptionsResult> {
