@@ -31,7 +31,7 @@ api.getBotInfo().then(({ user_id, name, description }) => {
 });
 
 ```
-Other methods can be found in [docs](https://dev.tamtam.chat/)
+For other examples check [examples folder](https://github.com/twister55/tamtam-bot-api/tree/master/examples)
 
 ## Contributing
 
