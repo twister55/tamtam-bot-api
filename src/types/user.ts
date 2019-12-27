@@ -6,7 +6,3 @@ export interface User {
     avatar_url?: string;
     full_avatar_url?: string;
 }
-
-export interface UserIdsList {
-    user_ids: number[];
-}

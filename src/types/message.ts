@@ -13,14 +13,6 @@ export interface Message {
     constructor?: User;
 }
 
-export interface GetMessagesParams {
-    chat_id?: number;
-    message_ids?: string[];
-    from?: number;
-    to?: number;
-    count?: number;
-}
-
 export interface MessageList {
     messages: Message[];
 }

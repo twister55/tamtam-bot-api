@@ -1,55 +1,80 @@
-import { HttpClient } from 'http-client';
+import { Client } from 'client';
+import { Transport, AxiosTransport } from 'transport';
+import { ApiError } from 'error';
 import { Action } from 'types/action';
 import { CallbackAnswer, ConstructorAnswer } from 'types/answer';
-import { BotInfo, BotPatch } from 'types/bot-info';
-import { Chat, ChatList, ChatMember, ChatMembersList, ChatPatch } from 'types/chat';
-import { GetMessagesParams, Message, MessageList } from 'types/message';
-import { SendMessageParams, SendMessageResult, NewMessageBody } from 'types/new-message';
-import { Result } from 'types/result';
-import { GetSubscriptionsResult, SubscriptionRequest } from 'types/subscription';
-import { UpdateList, UpdateParams } from 'types/update';
-import { UserIdsList } from 'types/user';
-import { UploadEndpoint, UploadType } from 'types/upload';
+import { BotInfo } from 'types/bot-info';
+import { Chat, ChatList, ChatMember, ChatMembersList } from 'types/chat';
+import { Result, UpdateParams, BotData, ChatData, UserIdsList, GetMessagesParams, SendMessageParams, MessageResult, SubscriptionsResult } from 'types/http';
+import { Message, MessageList } from 'types/message';
+import { NewMessageBody } from 'types/new-message';
+import { Updates, UpdateType } from 'types/update';
+import { UploadEndpoint } from 'types/upload';
+import { RequireAtLeastOne } from 'types/utils';
 
-const HOST = 'https://botapi.tamtam.chat';
+const HOST = process.env.TAMTAM_API_HOST || 'https://botapi.tamtam.chat';
+const TOKEN = process.env.TAMTAM_API_TOKEN || '';
 const VERSION = '0.2.0';
 
 export class TamTamBotAPI {
-    private readonly client: HttpClient;
+    private readonly client: Client;
 
-    public static create(token: string) {
-        return new TamTamBotAPI(token);
+    constructor(token: string, host?: string);
+    constructor(token: string, transport?: Transport);
+    constructor(token: string, host?: string, transport?: Transport);
+    constructor(token: string = TOKEN, hostOrTransport: string | Transport = HOST, transport?: Transport) {
+        if (!token) {
+            throw new ApiError('Access token required', 'init', 'token.error');
+        }
+
+        if (typeof hostOrTransport === 'object') {
+            this.client = new Client(token, HOST, hostOrTransport, VERSION);
+        } else {
+            this.client = new Client(token, hostOrTransport, transport || new AxiosTransport(), VERSION);
+        }
     }
 
-    private constructor(token: string) {
-        this.client = new HttpClient(HOST, token, VERSION);
+    public get transport(): Transport {
+        return this.client.transport;
+    }
+
+    public get version(): string {
+        return this.client.version;
     }
 
     public getBotInfo(): Promise<BotInfo> {
         return this.client.get('me');
     }
 
-    public setBotInfo(patch: BotPatch): Promise<BotInfo> {
-        return this.client.patch('me', patch);
+    public setBotInfo(data: RequireAtLeastOne<BotData>): Promise<BotInfo> {
+        return this.client.patch('me', {
+            data
+        });
     }
 
-    public getUpdates(params?: UpdateParams): Promise<UpdateList> {
+    public getUpdates(params?: UpdateParams): Promise<Updates> {
         return this.client.get('updates', params);
     }
 
-    public getSubscriptions(): Promise<GetSubscriptionsResult> {
+    public getSubscriptions(): Promise<SubscriptionsResult> {
         return this.client.get('subscriptions');
     }
 
-    public subscribe(data: SubscriptionRequest): Promise<Result> {
+    public subscribe(url: string, updateTypes?: UpdateType[], version?: string): Promise<Result> {
         return this.client.post('subscriptions', {
-            data
+            data: {
+                url,
+                update_types: updateTypes,
+                version
+            }
         });
     }
 
     public unsubscribe(url: string): Promise<Result> {
         return this.client.delete('subscriptions', {
-            url
+            params: {
+                url
+            }
         });
     }
 
@@ -64,8 +89,10 @@ export class TamTamBotAPI {
         return this.client.get(`chat/${chatId}`);
     }
 
-    public editChat(chatId: number, patch: ChatPatch): Promise<Chat> {
-        return this.client.patch(`chat/${chatId}`, patch);
+    public editChat(chatId: number, data: RequireAtLeastOne<ChatData>): Promise<Chat> {
+        return this.client.patch(`chat/${chatId}`, {
+            data
+        });
     }
 
     public getChatMembership(chatId: number): Promise<ChatMember> {
@@ -88,10 +115,12 @@ export class TamTamBotAPI {
         });
     }
 
-    public removeMember(chatId: number, userId: number, block: boolean): Promise<Result> {
+    public removeMember(chatId: number, userId: number, block: boolean = false): Promise<Result> {
         return this.client.delete(`chats/${chatId}/members`, {
-            user_id: userId,
-            block
+            params: {
+                user_id: userId,
+                block
+            }
         });
     }
 
@@ -115,30 +144,14 @@ export class TamTamBotAPI {
         });
     }
 
-    public sendMessage(params: SendMessageParams, data: NewMessageBody): Promise<Message> {
-        return this.client.post<SendMessageResult>('messages', {
+    public sendMessage(params: SendMessageParams, data: NewMessageBody): Promise<MessageResult> {
+        return this.client.post('messages', {
             params,
             data
-        }).then(result => {
-            return result.message;
         });
     }
 
-    public sendMessageToUser(userId: number, data: NewMessageBody, disableLinkPreview?: boolean): Promise<Message> {
-        return this.sendMessage({
-            user_id: userId,
-            disable_link_preview: disableLinkPreview
-        }, data);
-    }
-
-    public sendMessageToChat(chatId: number, data: NewMessageBody, disableLinkPreview?: boolean): Promise<Message> {
-        return this.sendMessage({
-            chat_id: chatId,
-            disable_link_preview: disableLinkPreview
-        }, data);
-    }
-
-    public editMessage(messageId: string, data: NewMessageBody): Promise<SendMessageResult> {
+    public editMessage(messageId: string, data: NewMessageBody): Promise<MessageResult> {
         return this.client.put('messages', {
             params: {
                 message_id: messageId
@@ -149,11 +162,13 @@ export class TamTamBotAPI {
 
     public deleteMessage(messageId: string): Promise<Result> {
         return this.client.delete('messages', {
-            message_id: messageId
+            params: {
+                message_id: messageId
+            }
         });
     }
 
-    public answerOnCallback(callbackId: string, answer: CallbackAnswer): Promise<Result> {
+    public answerOnCallback(callbackId: string, answer: RequireAtLeastOne<CallbackAnswer>): Promise<Result> {
         return this.client.post('answers', {
             params: {
                 callback_id: callbackId
@@ -171,7 +186,7 @@ export class TamTamBotAPI {
         });
     }
 
-    public upload(type: UploadType): Promise<UploadEndpoint> {
+    public upload(type: 'image' | 'video' | 'audio' | 'file'): Promise<UploadEndpoint> {
         return this.client.post('uploads', {
             params: {
                 type

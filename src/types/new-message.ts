@@ -1,21 +1,5 @@
 import { AttachmentRequest } from './attachment';
-import { Message, MessageLinkType } from './message';
-
-export type SendMessageParams = SendMessageToUserParams | SendMessageToChatParams;
-
-export interface SendMessageToUserParams {
-    user_id: number;
-    disable_link_preview?: boolean;
-}
-
-export interface SendMessageToChatParams {
-    chat_id: number;
-    disable_link_preview?: boolean;
-}
-
-export interface SendMessageResult {
-    message: Message;
-}
+import { MessageLinkType } from './message';
 
 export interface NewMessageBody {
     text?: string;

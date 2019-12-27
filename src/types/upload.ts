@@ -7,13 +7,6 @@ export interface UploadEndpoint {
     url: string;
 }
 
-export const enum UploadType {
-    IMAGE = 'image',
-    VIDEO = 'video',
-    AUDIO = 'audio',
-    FILE = 'file'
-}
-
 /**
  * This is information you will receive as soon as audio/video is uploaded
  */

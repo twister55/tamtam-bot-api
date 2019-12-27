@@ -4,20 +4,15 @@ import { Keyboard } from './button';
 /**
  * Send this object when your bot wants to react to when a button is pressed
  */
-export type CallbackAnswer = CallbackMessageAnswer | CallbackNotificationResult;
-
-/**
- * Fill this if you want to modify current message
- */
-export interface CallbackMessageAnswer {
-    message: NewMessageBody;
-}
-
-/**
- * Fill this if you just want to send one-time notification to user
- */
-export interface CallbackNotificationResult {
-    notification: string;
+export interface CallbackAnswer {
+    /**
+     * Fill this if you want to modify current message
+     */
+    message?: NewMessageBody;
+    /**
+     * Fill this if you just want to send one-time notification to user
+     */
+    notification?: string;
 }
 
 /**
@@ -25,7 +20,7 @@ export interface CallbackNotificationResult {
  */
 export interface ConstructorAnswer {
     /**
-     * Array of prepared messages. This messages will be sent as user taps on \"Send\" button
+     * Prepared messages. This messages will be sent as user taps on \"Send\" button
      */
     messages?: NewMessageBody[];
     /**

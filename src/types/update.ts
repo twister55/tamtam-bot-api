@@ -30,17 +30,10 @@ export const enum UpdateType {
     MESSAGE_CONSTRUCTED = 'message_constructed',
     MESSAGE_CHAT_CREATED = 'message_chat_created',
     USER_ADDED = 'user_added',
-    USER_REMOVED = 'user_removed',
+    USER_REMOVED = 'user_removed'
 }
 
-export interface UpdateParams {
-    limit?: number;
-    timeout?: number;
-    marker?: number;
-    types?: UpdateType[];
-}
-
-export interface UpdateList {
+export interface Updates {
     updates: Update[];
     marker: number;
 }
@@ -49,7 +42,7 @@ export interface UpdateList {
  * You will receive this update when bot has been added to chat
  */
 export interface BotAddedToChatUpdate {
-    type: UpdateType.BOT_ADDED;
+    update_type: UpdateType.BOT_ADDED;
     chat_id: number;
     user: User;
     timestamp: number;
@@ -59,7 +52,7 @@ export interface BotAddedToChatUpdate {
  * You will receive this update when bot has been removed from chat
  */
 export interface BotRemovedFromChatUpdate {
-    type: UpdateType.BOT_REMOVED;
+    update_type: UpdateType.BOT_REMOVED;
     chat_id: number;
     user: User;
     timestamp: number;
@@ -69,7 +62,7 @@ export interface BotRemovedFromChatUpdate {
  * Bot gets this type of update as soon as user pressed `Start` button
  */
 export interface BotStartedUpdate {
-    type: UpdateType.BOT_STARTED;
+    update_type: UpdateType.BOT_STARTED;
     chat_id: number;
     user: User;
     payload?: string;
@@ -81,7 +74,7 @@ export interface BotStartedUpdate {
  * Bot gets this type of update as soon as title has been changed in chat
  */
 export interface ChatTitleChangedUpdate {
-    type: UpdateType.CHAT_TITLE_CHANGED;
+    update_type: UpdateType.CHAT_TITLE_CHANGED;
     chat_id: number;
     user: User;
     title: string;
@@ -92,7 +85,7 @@ export interface ChatTitleChangedUpdate {
  * You will get this `update` as soon as user presses button
  */
 export interface MessageCallbackUpdate {
-    type: UpdateType.MESSAGE_CALLBACK;
+    update_type: UpdateType.MESSAGE_CALLBACK;
     callback: Callback;
     message?: Message;
     user_locale?: string;
@@ -113,7 +106,7 @@ export interface Callback {
  * Bot will get this update when chat has been created as soon as first user clicked chat button
  */
 export interface MessageChatCreatedUpdate {
-    type: UpdateType.MESSAGE_CHAT_CREATED;
+    update_type: UpdateType.MESSAGE_CHAT_CREATED;
     chat: Chat;
     message_id: string;
     start_payload?: string;
@@ -124,7 +117,7 @@ export interface MessageChatCreatedUpdate {
  * Bot will get this update when constructed message has been posted to any chat
  */
 export interface MessageConstructedUpdate {
-    type: UpdateType.MESSAGE_CONSTRUCTED;
+    update_type: UpdateType.MESSAGE_CONSTRUCTED;
     session_d: string;
     message: ConstructedMessage;
     timestamp: number;
@@ -144,7 +137,7 @@ export interface ConstructedMessage {
  * Bot will get this update when user sent to bot any message or pressed button during construction process
  */
 export interface MessageConstructionRequestUpdate {
-    type: UpdateType.MESSAGE_CONSTRUCTION_REQUEST;
+    update_type: UpdateType.MESSAGE_CONSTRUCTION_REQUEST;
     user: User;
     user_locale?: string;
     session_id: string;
@@ -158,16 +151,11 @@ export interface MessageConstructionRequestUpdate {
  */
 export type ConstructorInput = CallbackConstructorInput | MessageConstructorInput;
 
-export const enum ConstructorInputType {
-    CALLBACK = 'callback',
-    MESSAGE = 'message'
-}
-
 /**
  * Bot will get this input as soon as soon user taps on button created by bot in construction mode
  */
 export interface CallbackConstructorInput {
-    input_type: ConstructorInputType.CALLBACK;
+    input_type: 'callback';
     payload: string;
 }
 
@@ -179,7 +167,7 @@ export interface CallbackConstructorInput {
  * Can be empty on initial request when user just opened constructor
  */
 export interface MessageConstructorInput {
-    input_type: ConstructorInputType.MESSAGE;
+    input_type: 'message';
     messages: NewMessageBody[];
 }
 
@@ -187,7 +175,7 @@ export interface MessageConstructorInput {
  * You will get this `update` as soon as message is created
  */
 export interface MessageCreatedUpdate {
-    type: UpdateType.MESSAGE_CREATED;
+    update_type: UpdateType.MESSAGE_CREATED;
     message: Message;
     timestamp: number;
 }
@@ -196,7 +184,7 @@ export interface MessageCreatedUpdate {
  * You will get this `update` as soon as message is edited
  */
 export interface MessageEditedUpdate {
-    type: UpdateType.MESSAGE_EDITED;
+    update_type: UpdateType.MESSAGE_EDITED;
     message: Message;
     timestamp: number;
 }
@@ -205,7 +193,7 @@ export interface MessageEditedUpdate {
  * You will get this `update` as soon as message is removed
  */
 export interface MessageRemovedUpdate {
-    type: UpdateType.MESSAGE_REMOVED;
+    update_type: UpdateType.MESSAGE_REMOVED;
     message_id: string;
     chat_id: number;
     user_id: number;
@@ -216,11 +204,11 @@ export interface MessageRemovedUpdate {
  * You will receive this update when user has been added to chat where bot is administrator
  */
 export interface UserAddedToChatUpdate {
-    type: UpdateType.USER_ADDED;
+    update_type: UpdateType.USER_ADDED;
     chat_id: number;
     user: User;
     /**
-     * Can be `null` in case when user joined chat by link
+     * Can be undefined in case when user joined chat by link
      */
     inviter_id?: number;
     timestamp: number;
@@ -230,11 +218,11 @@ export interface UserAddedToChatUpdate {
  * You will receive this update when user has been removed from chat where bot is administrator
  */
 export interface UserRemovedFromChatUpdate {
-    type: UpdateType.USER_REMOVED;
+    update_type: UpdateType.USER_REMOVED;
     chat_id: number;
     user: User;
     /**
-     * Can be `null` in case when user left chat
+     * Can be undefined in case when user left chat
      */
     admin_id?: number;
     timestamp: number;

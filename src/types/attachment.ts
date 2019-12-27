@@ -1,6 +1,6 @@
+import { Keyboard } from './button';
 import { UploadedInfo } from './upload';
 import { User } from './user';
-import { Button, Keyboard } from './button';
 
 export type Attachment = ImageAttachment |
                          VideoAttachment |
@@ -108,11 +108,7 @@ export interface InlineKeyboardAttachment {
 
 export interface InlineKeyboardAttachmentRequest {
     type: AttachmentType.INLINE_KEYBOARD;
-    payload: InlineKeyboardAttachmentRequestPayload;
-}
-
-export interface InlineKeyboardAttachmentRequestPayload {
-    buttons: Button[][];
+    payload: Keyboard;
 }
 
 export interface LocationAttachment {
