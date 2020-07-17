@@ -20,9 +20,6 @@
   "bugs": {
     "url": "https://github.com/twister55/tamtam-bot-api/issues"
   },
-  "directories": {
-    "example": "examples"
-  },
   "keywords": [
     "tamtam",
     "bot",
