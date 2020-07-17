@@ -1,20 +1,16 @@
 {
   "name": "examples",
   "version": "1.0.0",
+  "description": "Examples in typescript so first of all you need install dependencies and compile it to javascript",
   "private": true,
   "scripts": {
     "build": "tsc"
   },
   "devDependencies": {
-    "typescript": "^3.7.3"
+    "typescript": "^3.9.7"
   },
   "dependencies": {
     "form-data": "^3.0.0",
-    "tamtam-bot-api": "^0.1.1-0"
-  },
-  "description": "Examples in typescript so first of all you need install dependencies and compile it to javascript",
-  "main": "bot-info.js",
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "tamtam-bot-api": "latest"
+  }
 }
