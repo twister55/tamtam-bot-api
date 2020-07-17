@@ -2,13 +2,21 @@
   "compilerOptions": {
     "alwaysStrict": true,
     "target": "es5",
-    "module": "es6",
+    "module": "commonjs",
     "declaration": true,
     "outDir": "./dist",
-    "baseUrl": "./src",
+    "baseUrl": ".",
     "strict": true,
     "moduleResolution": "node",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": false,
+    "paths": {
+      "*": ["src/*"]
+    },
+    "plugins": [{
+      "transform": "@zerollup/ts-transform-paths"
+    }]
   },
   "include": [
     "src/**/*"

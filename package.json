@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "build": "rollup -c",
+    "build": "ttsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "tslint --config ./tslint.json --project \".\"",
     "prepublish": "npm run build && npm run lint"
@@ -29,15 +29,16 @@
   ],
   "author": "Vadim Yelisseyev",
   "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/node": "^14.0.23",
+    "@zerollup/ts-transform-paths": "^1.7.18",
+    "husky": "^2.2.0",
+    "tslint": "^5.15.0",
+    "ttypescript": "^1.5.10",
+    "typescript": "^3.9.7"
+  },
   "dependencies": {
     "axios": "^0.19.0"
-  },
-  "devDependencies": {
-    "husky": "^2.2.0",
-    "rollup": "^1.11.3",
-    "rollup-plugin-typescript2": "^0.21.0",
-    "tslint": "^5.15.0",
-    "typescript": "^3.7.3"
   },
   "husky": {
     "hooks": {
