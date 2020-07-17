@@ -10,6 +10,8 @@
     "lint": "tslint --config ./tslint.json --project \".\"",
     "prepublish": "npm run build && npm run lint"
   },
+  "author": "Vadim Yelisseyev",
+  "license": "Apache-2.0",
   "homepage": "https://github.com/twister55/tamtam-bot-api#readme",
   "repository": {
     "type": "git",
@@ -27,13 +29,11 @@
     "api",
     "messenger"
   ],
-  "author": "Vadim Yelisseyev",
-  "license": "Apache-2.0",
   "devDependencies": {
     "@types/node": "^14.0.23",
     "@zerollup/ts-transform-paths": "^1.7.18",
     "husky": "^2.2.0",
-    "tslint": "^5.15.0",
+    "tslint": "^6.1.2",
     "ttypescript": "^1.5.10",
     "typescript": "^3.9.7"
   },
