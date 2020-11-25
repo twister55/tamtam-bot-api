@@ -1,12 +1,12 @@
 
 export class ApiError extends Error {
-    public command: string;
+    public uri: string;
     public code: string;
     public status?: number;
 
-    constructor(message: string, command: string, code: string, status?: number) {
+    constructor(message: string, uri: string, code: string, status?: number) {
         super(message);
-        this.command = command;
+        this.uri = uri;
         this.code = code;
         this.status = status;
         Error.captureStackTrace(this, this.constructor);

@@ -1,18 +1,41 @@
-import { Transport, Method, RequestOptions, RequestParams } from 'transport';
 
-import { ApiError } from './error';
+export type Method = 'GET' | 'DELETE' | 'POST' | 'PUT' | 'PATCH';
 
-export class Client {
+export interface RequestHeaders {
+    [key: string]: string;
+}
+
+export interface RequestParams {
+    [key: string]: any;
+}
+
+export interface RequestOptions {
+    headers?: RequestHeaders;
+    params?: RequestParams;
+    data?: RequestParams | FormData;
+}
+
+export interface RequestError {
+    error?: string;
+    code: string;
+    message: string;
+}
+
+export interface HttpClient {
+    request<R>(method: Method, url: string, options: Partial<RequestOptions>): Promise<R>;
+}
+
+export class ApiClient implements HttpClient {
     public readonly host: string;
     public readonly token: string;
-    public readonly transport: Transport;
     public readonly version: string;
+    public readonly http: HttpClient;
 
-    constructor(token: string, host: string, transport: Transport, version: string) {
-        this.token = token;
+    constructor(host: string, token: string, version: string, http: HttpClient) {
         this.host = host.charAt(host.length - 1) === '/' ? host : host + '/';
-        this.transport = transport;
+        this.token = token;
         this.version = version;
+        this.http = http;
     }
 
     public get<R>(endpoint: string, params: RequestParams = {}): Promise<R> {
@@ -33,17 +56,17 @@ export class Client {
         return this.request('DELETE', command, options);
     }
 
-    public patch<R>(command: string, options: Partial<RequestOptions> = {}): Promise<R> {
-        return this.request('PATCH', command, options);
+    public patch<R>(command: string, data: RequestParams): Promise<R> {
+        return this.request('PATCH', command, {
+            data
+        });
     }
 
-    protected request<R>(method: Method, command: string, options: Partial<RequestOptions>): Promise<R> {
+    public request<R>(method: Method, uri: string, options: Partial<RequestOptions>): Promise<R> {
         options.params = options.params || {};
         options.params.access_token = this.token;
         options.params.v = this.version;
 
-        return this.transport.request<R>(method, this.host + command, options).catch(error => {
-            throw new ApiError(error.message, command, error.code, error.status);
-        });
+        return this.http.request<R>(method, this.host + uri, options);
     }
 }

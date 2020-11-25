@@ -1,45 +1,38 @@
-import { Client } from 'client';
-import { Transport, AxiosTransport } from 'transport';
-import { ApiError } from 'error';
-import { Action } from 'types/action';
-import { CallbackAnswer, ConstructorAnswer } from 'types/answer';
-import { BotInfo } from 'types/bot-info';
-import { Chat, ChatList, ChatMember, ChatMembersList } from 'types/chat';
-import { Result, UpdateParams, BotData, ChatData, UserIdsList, GetMessagesParams, SendMessageParams, MessageResult, SubscriptionsResult } from 'types/http';
-import { Message, MessageList } from 'types/message';
-import { NewMessageBody } from 'types/new-message';
-import { Updates, UpdateType } from 'types/update';
-import { UploadEndpoint } from 'types/upload';
-import { RequireAtLeastOne } from 'types/utils';
+import { ApiClient, HttpClient } from 'client';
+import {
+    Action,
+    CallbackAnswer,
+    ConstructorAnswer,
+    BotInfo,
+    Chat,
+    ChatList,
+    ChatMember,
+    ChatMembersList,
+    Result,
+    UpdateParams,
+    BotData,
+    ChatData,
+    UserIdsList,
+    GetMessagesParams,
+    SendMessageParams,
+    MessageResult,
+    SubscriptionsResult,
+    Message,
+    MessageList,
+    NewMessageBody,
+    Updates,
+    UpdateType,
+    UploadEndpoint,
+    RequireAtLeastOne
+} from 'types';
 
-const HOST = process.env.TAMTAM_API_HOST || 'https://botapi.tamtam.chat';
-const TOKEN = process.env.TAMTAM_API_TOKEN || '';
 const VERSION = '0.2.0';
 
 export class TamTamBotAPI {
-    private readonly client: Client;
+    public readonly client: ApiClient;
 
-    constructor(token: string, host?: string);
-    constructor(token: string, transport?: Transport);
-    constructor(token: string, host?: string, transport?: Transport);
-    constructor(token: string = TOKEN, hostOrTransport: string | Transport = HOST, transport?: Transport) {
-        if (!token) {
-            throw new ApiError('Access token required', 'init', 'token.error');
-        }
-
-        if (typeof hostOrTransport === 'object') {
-            this.client = new Client(token, HOST, hostOrTransport, VERSION);
-        } else {
-            this.client = new Client(token, hostOrTransport, transport || new AxiosTransport(), VERSION);
-        }
-    }
-
-    public get transport(): Transport {
-        return this.client.transport;
-    }
-
-    public get version(): string {
-        return this.client.version;
+    constructor(token: string, host: string, client: HttpClient) {
+        this.client = new ApiClient(host, token, VERSION, client);
     }
 
     public getBotInfo(): Promise<BotInfo> {
@@ -47,9 +40,7 @@ export class TamTamBotAPI {
     }
 
     public setBotInfo(data: RequireAtLeastOne<BotData>): Promise<BotInfo> {
-        return this.client.patch('me', {
-            data
-        });
+        return this.client.patch('me', data);
     }
 
     public getUpdates(params?: UpdateParams): Promise<Updates> {
@@ -90,9 +81,7 @@ export class TamTamBotAPI {
     }
 
     public editChat(chatId: number, data: RequireAtLeastOne<ChatData>): Promise<Chat> {
-        return this.client.patch(`chat/${chatId}`, {
-            data
-        });
+        return this.client.patch(`chat/${chatId}`, data);
     }
 
     public getChatMembership(chatId: number): Promise<ChatMember> {
