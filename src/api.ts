@@ -69,7 +69,7 @@ export class TamTamBotAPI {
         });
     }
 
-    public getChats(count: number = 50, marker?: string): Promise<ChatList> {
+    public getChats(count = 50, marker?: string): Promise<ChatList> {
         return this.client.get('chats', {
             count,
             marker
@@ -104,7 +104,7 @@ export class TamTamBotAPI {
         });
     }
 
-    public removeMember(chatId: number, userId: number, block: boolean = false): Promise<Result> {
+    public removeMember(chatId: number, userId: number, block = false): Promise<Result> {
         return this.client.delete(`chats/${chatId}/members`, {
             params: {
                 user_id: userId,
@@ -182,5 +182,4 @@ export class TamTamBotAPI {
             }
         });
     }
-
 }

@@ -1,4 +1,3 @@
-
 export type Method = 'GET' | 'DELETE' | 'POST' | 'PUT' | 'PATCH';
 
 export interface RequestHeaders {
@@ -6,6 +5,7 @@ export interface RequestHeaders {
 }
 
 export interface RequestParams {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     [key: string]: any;
 }
 

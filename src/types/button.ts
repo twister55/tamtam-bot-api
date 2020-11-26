@@ -1,4 +1,3 @@
-
 export type Button = CallbackButton | LinkButton | RequestContactButton | RequestGeoLocationButton | ChatButton;
 
 export interface Keyboard {

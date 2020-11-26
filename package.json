@@ -7,7 +7,7 @@
   "scripts": {
     "build": "ttsc",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "tslint --config ./tslint.json --project \".\"",
+    "lint": "eslint --fix 'src/**/*.{js,ts}'",
     "prepublish": "npm run build && npm run lint"
   },
   "author": "Vadim Yelisseyev",
@@ -28,9 +28,15 @@
   ],
   "devDependencies": {
     "@types/node": "^14.0.23",
+    "@typescript-eslint/eslint-plugin": "^4.8.2",
+    "@typescript-eslint/parser": "^4.8.2",
     "@zerollup/ts-transform-paths": "^1.7.18",
+    "eslint": "^7.14.0",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-prefer-arrow": "^1.2.2",
+    "eslint-plugin-prettier": "^3.1.4",
     "husky": "^2.2.0",
-    "tslint": "^6.1.2",
+    "prettier": "^2.2.0",
     "ttypescript": "^1.5.10",
     "typescript": "^3.9.7"
   },

@@ -1,4 +1,3 @@
-
 export class ApiError extends Error {
     public uri: string;
     public code: string;

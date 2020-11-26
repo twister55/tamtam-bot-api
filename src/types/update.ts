@@ -3,19 +3,20 @@ import { Message, MessageLink, MessageBody } from './message';
 import { NewMessageBody } from './new-message';
 import { Chat } from './chat';
 
-export type Update = MessageCreatedUpdate |
-                     MessageCallbackUpdate |
-                     MessageEditedUpdate |
-                     MessageRemovedUpdate |
-                     BotAddedToChatUpdate |
-                     BotRemovedFromChatUpdate |
-                     BotStartedUpdate |
-                     ChatTitleChangedUpdate |
-                     MessageConstructionRequestUpdate |
-                     MessageConstructedUpdate |
-                     MessageChatCreatedUpdate |
-                     UserAddedToChatUpdate |
-                     UserRemovedFromChatUpdate;
+export type Update =
+    | MessageCreatedUpdate
+    | MessageCallbackUpdate
+    | MessageEditedUpdate
+    | MessageRemovedUpdate
+    | BotAddedToChatUpdate
+    | BotRemovedFromChatUpdate
+    | BotStartedUpdate
+    | ChatTitleChangedUpdate
+    | MessageConstructionRequestUpdate
+    | MessageConstructedUpdate
+    | MessageChatCreatedUpdate
+    | UserAddedToChatUpdate
+    | UserRemovedFromChatUpdate;
 
 export const enum UpdateType {
     MESSAGE_CREATED = 'message_created',

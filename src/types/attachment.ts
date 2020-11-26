@@ -2,25 +2,18 @@ import { Keyboard } from './button';
 import { UploadedInfo } from './upload';
 import { User } from './user';
 
-export type Attachment = ImageAttachment |
-                         VideoAttachment |
-                         AudioAttachment |
-                         FileAttachment |
-                         ContactAttachment |
-                         StickerAttachment |
-                         ShareAttachment |
-                         LocationAttachment |
-                         InlineKeyboardAttachment;
+export type Attachment = ImageAttachment | VideoAttachment | AudioAttachment | FileAttachment | ContactAttachment | StickerAttachment | ShareAttachment | LocationAttachment | InlineKeyboardAttachment;
 
-export type AttachmentRequest = ImageAttachmentRequest |
-                                VideoAttachmentRequest |
-                                AudioAttachmentRequest |
-                                FileAttachmentRequest |
-                                ContactAttachmentRequest |
-                                ShareAttachmentRequest |
-                                StickerAttachmentRequest |
-                                LocationAttachmentRequest |
-                                InlineKeyboardAttachmentRequest;
+export type AttachmentRequest =
+    | ImageAttachmentRequest
+    | VideoAttachmentRequest
+    | AudioAttachmentRequest
+    | FileAttachmentRequest
+    | ContactAttachmentRequest
+    | ShareAttachmentRequest
+    | StickerAttachmentRequest
+    | LocationAttachmentRequest
+    | InlineKeyboardAttachmentRequest;
 
 export const enum AttachmentType {
     IMAGE = 'image',

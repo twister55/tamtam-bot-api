@@ -28,7 +28,7 @@ export function createAPI(token: string = TOKEN, hostOrClient: string | HttpClie
         host = HOST;
     } else {
         host = hostOrClient;
-        client = httpClient || new AxiosClient()
+        client = httpClient || new AxiosClient();
     }
 
     return new TamTamBotAPI(token, host, client);

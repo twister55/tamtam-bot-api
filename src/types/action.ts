@@ -1,4 +1,3 @@
-
 export const enum Action {
     TYPING_ON = 'typing_on',
     SENDING_PHOTO = 'sending_photo',
