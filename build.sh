@@ -25,3 +25,5 @@ java $JAVA_OPTS org.openapitools.codegen.OpenAPIGenerator generate \
     -g tamtam-bot-api-typescript \
     -i https://raw.githubusercontent.com/tamtam-chat/tamtam-bot-api-schema/master/schema.yaml \
     -o ./
+
+npm run lint
