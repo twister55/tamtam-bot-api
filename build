@@ -1,8 +1,18 @@
 #!/usr/bin/env bash
 
-mvn package
+GENERATOR_VERSION="4.3.1"
+JAR_NAME="openapi-generator-cli-$GENERATOR_VERSION.jar"
+REMOTE_JAR_URL="https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/$GENERATOR_VERSION/$JAR_NAME"
+LOCAL_JAR_DIR=".openapi-generator"
+LOCAL_JAR_PATH="./$LOCAL_JAR_DIR/$JAR_NAME"
 
-JAVA_OPTS="-cp ./target/typescript-generator-1.0.0.jar:./target/openapi-generator-cli-4.3.1.jar"
+mkdir -p $LOCAL_JAR_DIR
+
+test -f $LOCAL_JAR_PATH || curl -o $LOCAL_JAR_PATH $REMOTE_JAR_URL
+
+mvn package -f ./generator/pom.xml
+
+JAVA_OPTS="-cp ./generator/target/typescript-generator-0.1.0.jar:$LOCAL_JAR_PATH"
 
 if [ "$1" == "-d" ]; then
   echo "Starting in debug mode (suspended, waiting for remote debugger)"
@@ -14,4 +24,4 @@ fi
 java $JAVA_OPTS org.openapitools.codegen.OpenAPIGenerator generate \
     -g tamtam-bot-api-typescript \
     -i https://raw.githubusercontent.com/tamtam-chat/tamtam-bot-api-schema/master/schema.yaml \
-    -o generated
+    -o ./
