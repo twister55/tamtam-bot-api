@@ -1,8 +1,8 @@
-import { TamTamBotAPI, UpdateType, Update } from 'tamtam-bot-api';
+import { createAPI, UpdateType, Update } from 'tamtam-bot-api';
 
-const api = new TamTamBotAPI(process.argv[2]);
+const api = createAPI(process.argv[2]);
 
-let MARKER: number = 0;
+let MARKER = 0;
 
 function startPolling() {
     api.getUpdates({
@@ -12,11 +12,14 @@ function startPolling() {
 
         updates.forEach((update: Update) => {
             if (update.update_type === UpdateType.MESSAGE_CREATED) {
-                api.sendMessage({
-                    user_id: update.message.sender!.user_id
-                }, {
-                    text: update.message.body!.text
-                });
+                api.sendMessage(
+                    {
+                        user_id: update.message.sender!.user_id
+                    },
+                    {
+                        text: update.message.body!.text
+                    }
+                );
             }
         });
 

@@ -1,6 +1,7 @@
-import { TamTamBotAPI } from 'tamtam-bot-api';
+/* eslint-disable no-console */
+import { createAPI } from 'tamtam-bot-api';
 
-const api = new TamTamBotAPI(process.argv[2]);
+const api = createAPI(process.argv[2]);
 
 api.getBotInfo()
     .then(({ user_id, name, description }) => {
