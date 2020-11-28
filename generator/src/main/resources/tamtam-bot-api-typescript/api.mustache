@@ -1,0 +1,33 @@
+{{>_banner}}
+
+{{#api}}
+import { ApiClient, HttpClient } from 'client';
+import { {{imports}} } from 'types';
+
+/**
+ * {{{appName}}}
+ *
+ * @see https://dev.tamtam.chat
+ * @version {{{appVersion}}}
+ */
+export class TamTamBotAPI {
+    public readonly client: ApiClient;
+
+    constructor(token: string, host: string, client: HttpClient) {
+        this.client = new ApiClient(host, token, '{{version}}', client);
+    }
+
+{{#operations}}
+    {{{doc}}}
+    public {{name}}({{#allParams}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}{{^-last}}, {{/-last}}{{/allParams}}): Promise<{{returnType}}> {
+        return this.client.request('{{httpMethod}}', `{{path}}`, {{#hasParams}}{
+            {{#bodyParam}}data: {{{bodyParam.paramName}}},{{/bodyParam}}
+            {{#hasQueryParams}}params: {
+                {{#queryParams}}{{baseName}}: {{paramName}},{{/queryParams}}
+            }{{/hasQueryParams}}
+        }{{/hasParams}});
+    }
+
+{{/operations}}
+}
+{{/api}}

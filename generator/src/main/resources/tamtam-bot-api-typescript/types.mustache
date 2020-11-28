@@ -1,0 +1,24 @@
+{{>_banner}}
+
+{{#types}}
+    {{{doc}}}
+    {{#isEnum}}
+        export const enum {{classname}} {
+        {{#enumVars}}
+            {{{name}}} = {{{value}}}{{^-last}},{{/-last}}
+        {{/enumVars}}
+        }
+    {{/isEnum}}
+    {{^isEnum}}
+        export interface {{classname}} {{#parent}}extends {{{parent}}} {{/parent}}{
+        {{#additionalPropertiesType}}
+            [key: string]: {{{additionalPropertiesType}}}{{#hasVars}} | any{{/hasVars}};
+        {{/additionalPropertiesType}}
+        {{#properties}}
+            {{{doc}}}
+            {{name}}{{^required}}?{{/required}}: {{{dataType}}}{{#isNullable}} | null{{/isNullable}};
+        {{/properties}}
+        }
+    {{/isEnum}}
+
+{{/types}}

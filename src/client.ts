@@ -15,12 +15,6 @@ export interface RequestOptions {
     data?: RequestParams | FormData;
 }
 
-export interface RequestError {
-    error?: string;
-    code: string;
-    message: string;
-}
-
 export interface HttpClient {
     request<R>(method: Method, url: string, options: Partial<RequestOptions>): Promise<R>;
 }
@@ -62,7 +56,8 @@ export class ApiClient implements HttpClient {
         });
     }
 
-    public request<R>(method: Method, uri: string, options: Partial<RequestOptions>): Promise<R> {
+    public request<R>(method: Method, uri: string, options?: Partial<RequestOptions>): Promise<R> {
+        options = options || {};
         options.params = options.params || {};
         options.params.access_token = this.token;
         options.params.v = this.version;

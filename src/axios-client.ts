@@ -1,6 +1,7 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
-import { HttpClient, Method, RequestOptions, RequestError } from 'client';
+import { HttpClient, Method, RequestOptions } from 'client';
+import { RequestError } from 'types';
 import { ApiError } from 'error';
 
 export class AxiosClient implements HttpClient {

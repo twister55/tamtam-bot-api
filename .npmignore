@@ -1,9 +1,10 @@
+/examples
+/generator
+/src
+/test
 npm-debug.log*
 node_modules
 jspm_packages
 .npm
 .*
 /*.*
-/test
-/src
-/examples

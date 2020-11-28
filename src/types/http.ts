@@ -4,6 +4,21 @@ import { Message } from './message';
 import { Subscription } from './subscription';
 import { UpdateType } from './update';
 
+export interface RequestError {
+    /**
+     * Error
+     */
+    error?: string;
+    /**
+     * Error code
+     */
+    code: string;
+    /**
+     * Human-readable description
+     */
+    message: string;
+}
+
 export interface Result {
     success: boolean;
     /**
