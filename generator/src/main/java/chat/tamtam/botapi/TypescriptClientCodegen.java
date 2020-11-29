@@ -97,6 +97,7 @@ public class TypescriptClientCodegen extends AbstractTypeScriptClientCodegen {
     private List<Type> collectTypes(List<Map<String, Object>> models) {
         return models.stream()
             .map(api -> (CodegenModel) api.get("model"))
+            .filter(model -> !model.name.endsWith("_allOf"))
             .map(Type::new)
             .collect(Collectors.toList());
     }
