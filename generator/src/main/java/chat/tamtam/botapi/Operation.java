@@ -37,7 +37,8 @@ public class Operation {
         if (hasBodyParam) {
             allParams.stream()
                 .filter(p -> bodyParam.paramName.equals(p.paramName))
-                .forEach(p -> p.paramName = "data");
+                .findFirst()
+                .ifPresent(p -> p.paramName = "data");
 
             bodyParam.paramName = "data";
         }
