@@ -4,9 +4,11 @@ export interface RequestHeaders {
     [key: string]: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type RequestParam = any;
+
 export interface RequestParams {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    [key: string]: any;
+    [key: string]: RequestParam;
 }
 
 export interface RequestOptions {
@@ -30,30 +32,6 @@ export class ApiClient implements HttpClient {
         this.token = token;
         this.version = version;
         this.http = http;
-    }
-
-    public get<R>(endpoint: string, params: RequestParams = {}): Promise<R> {
-        return this.request('GET', endpoint, {
-            params
-        });
-    }
-
-    public post<R>(command: string, options: Partial<RequestOptions> = {}): Promise<R> {
-        return this.request('POST', command, options);
-    }
-
-    public put<R>(command: string, options: Partial<RequestOptions> = {}): Promise<R> {
-        return this.request('PUT', command, options);
-    }
-
-    public delete<R>(command: string, options: Partial<RequestOptions> = {}): Promise<R> {
-        return this.request('DELETE', command, options);
-    }
-
-    public patch<R>(command: string, data: RequestParams): Promise<R> {
-        return this.request('PATCH', command, {
-            data
-        });
     }
 
     public request<R>(method: Method, uri: string, options?: Partial<RequestOptions>): Promise<R> {

@@ -27,3 +27,4 @@ java $JAVA_OPTS org.openapitools.codegen.OpenAPIGenerator generate \
     -o ./
 
 npm run lint
+npm run build
