@@ -346,12 +346,12 @@ export interface Chat {
  * Chat admin permissions
  */
 export const enum ChatAdminPermission {
-    ReadAllMessages = 'read_all_messages',
-    AddRemoveMembers = 'add_remove_members',
-    AddAdmins = 'add_admins',
-    ChangeChatInfo = 'change_chat_info',
-    PinMessage = 'pin_message',
-    Write = 'write'
+    READ_ALL_MESSAGES = 'read_all_messages',
+    ADD_REMOVE_MEMBERS = 'add_remove_members',
+    ADD_ADMINS = 'add_admins',
+    CHANGE_CHAT_INFO = 'change_chat_info',
+    PIN_MESSAGE = 'pin_message',
+    WRITE = 'write'
 }
 
 /**
@@ -474,11 +474,11 @@ export interface ChatPatch {
  * Chat status for current bot
  */
 export const enum ChatStatus {
-    Active = 'active',
-    Removed = 'removed',
-    Left = 'left',
-    Closed = 'closed',
-    Suspended = 'suspended'
+    ACTIVE = 'active',
+    REMOVED = 'removed',
+    LEFT = 'left',
+    CLOSED = 'closed',
+    SUSPENDED = 'suspended'
 }
 
 /**
@@ -509,9 +509,9 @@ export interface ChatTitleChangedUpdate {
  * Dialog (one-on-one), chat or channel
  */
 export const enum ChatType {
-    Dialog = 'dialog',
-    Chat = 'chat',
-    Channel = 'channel'
+    DIALOG = 'dialog',
+    CHAT = 'chat',
+    CHANNEL = 'channel'
 }
 
 /**
@@ -717,9 +717,9 @@ export interface InlineKeyboardAttachmentRequestPayload {
  * Intent of button
  */
 export const enum Intent {
-    Positive = 'positive',
-    Negative = 'negative',
-    Default = 'default'
+    POSITIVE = 'positive',
+    NEGATIVE = 'negative',
+    DEFAULT = 'default'
 }
 
 /**
@@ -1007,8 +1007,8 @@ export interface MessageEditedUpdate {
  * Type of linked message
  */
 export const enum MessageLinkType {
-    Forward = 'forward',
-    Reply = 'reply'
+    FORWARD = 'forward',
+    REPLY = 'reply'
 }
 
 /**
@@ -1225,12 +1225,12 @@ export interface SendMessageResult {
  * Different actions to send to chat members
  */
 export const enum SenderAction {
-    TypingOn = 'typing_on',
-    SendingPhoto = 'sending_photo',
-    SendingVideo = 'sending_video',
-    SendingAudio = 'sending_audio',
-    SendingFile = 'sending_file',
-    MarkSeen = 'mark_seen'
+    TYPING_ON = 'typing_on',
+    SENDING_PHOTO = 'sending_photo',
+    SENDING_VIDEO = 'sending_video',
+    SENDING_AUDIO = 'sending_audio',
+    SENDING_FILE = 'sending_file',
+    MARK_SEEN = 'mark_seen'
 }
 
 export interface ShareAttachment {
@@ -1419,10 +1419,10 @@ export interface UploadEndpoint {
  * Type of file uploading
  */
 export const enum UploadType {
-    Image = 'image',
-    Video = 'video',
-    Audio = 'audio',
-    File = 'file'
+    IMAGE = 'image',
+    VIDEO = 'video',
+    AUDIO = 'audio',
+    FILE = 'file'
 }
 
 /**
