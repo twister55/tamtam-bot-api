@@ -93,7 +93,7 @@ export interface BotInfo {
      * Unique public user name
      * Can be `null` if user is not accessible or it is not set
      */
-    username: string | null;
+    username?: string | null;
     /**
      * `true` if user is bot
      */
@@ -282,11 +282,11 @@ export interface Chat {
      * Visible title of chat
      * Can be null for dialogs
      */
-    title: string | null;
+    title?: string | null;
     /**
      * Icon of chat
      */
-    icon: Image | null;
+    icon?: Image | null;
     /**
      * Time of last event occurred in chat
      */
@@ -319,7 +319,7 @@ export interface Chat {
     /**
      * Chat description
      */
-    description: string | null;
+    description?: string | null;
     /**
      * Another user in conversation
      * For `dialog` type chats only
@@ -394,7 +394,7 @@ export interface ChatList {
     /**
      * Reference to the next page of requested chats
      */
-    marker: number | null;
+    marker?: number | null;
 }
 
 export interface ChatMember {
@@ -410,7 +410,7 @@ export interface ChatMember {
      * Unique public user name
      * Can be `null` if user is not accessible or it is not set
      */
-    username: string | null;
+    username?: string | null;
     /**
      * `true` if user is bot
      */
@@ -440,7 +440,7 @@ export interface ChatMember {
      * Permissions in chat if member is admin
      * `null` otherwise
      */
-    permissions: ChatAdminPermission[] | null;
+    permissions?: ChatAdminPermission[] | null;
 }
 
 export interface ChatMembersList {
@@ -610,7 +610,7 @@ export interface ContactAttachmentRequestPayload {
     /**
      * Contact name
      */
-    name: string | null;
+    name?: string | null;
     /**
      * Contact identifier if it is registered TamTam user
      */
@@ -850,13 +850,13 @@ export interface MessageBody {
     /**
      * Message text
      */
-    text: string | null;
+    text?: string | null;
     /**
      * Message attachments
      * Could be one of `Attachment` type
      * See description of this schema
      */
-    attachments: Attachment[] | null;
+    attachments?: Attachment[] | null;
 }
 
 /**
@@ -874,7 +874,7 @@ export interface MessageCallbackUpdate {
      * Original message containing inline keyboard
      * Can be `null` in case it had been deleted by the moment a bot got this update
      */
-    message: Message | null;
+    message?: Message | null;
     /**
      * Current user locale in IETF BCP 47 format
      */
@@ -965,7 +965,7 @@ export interface MessageConstructorInput {
      * Typically it is single element array but sometimes it can contains multiple messages
      * Can be empty on initial request when user just opened constructor
      */
-    messages: NewMessageBody[] | null;
+    messages?: NewMessageBody[] | null;
 }
 
 /**
@@ -1055,16 +1055,16 @@ export interface NewMessageBody {
     /**
      * Message text
      */
-    text: string | null;
+    text?: string | null;
     /**
      * Message attachments
      * See `AttachmentRequest` and it's inheritors for full information
      */
-    attachments: AttachmentRequest[] | null;
+    attachments?: AttachmentRequest[] | null;
     /**
      * Link to Message
      */
-    link: NewMessageLink | null;
+    link?: NewMessageLink | null;
     /**
      * If false, chat participants would not be notified
      */
@@ -1162,7 +1162,7 @@ export interface Recipient {
     /**
      * Chat identifier
      */
-    chat_id: number | null;
+    chat_id?: number | null;
     /**
      * Chat type
      */
@@ -1170,7 +1170,7 @@ export interface Recipient {
     /**
      * User identifier, if message was sent to user
      */
-    user_id: number | null;
+    user_id?: number | null;
 }
 
 /**
@@ -1346,9 +1346,9 @@ export interface Subscription {
     /**
      * Update types bot subscribed for
      */
-    update_types: string[] | null;
+    update_types?: string[] | null;
 
-    version: string | null;
+    version?: string | null;
 }
 
 /**
@@ -1402,7 +1402,7 @@ export interface UpdateList {
     /**
      * Pointer to the next data page
      */
-    marker: number | null;
+    marker?: number | null;
 }
 
 /**
@@ -1448,7 +1448,7 @@ export interface User {
      * Unique public user name
      * Can be `null` if user is not accessible or it is not set
      */
-    username: string | null;
+    username?: string | null;
     /**
      * `true` if user is bot
      */
@@ -1520,7 +1520,7 @@ export interface UserWithPhoto {
      * Unique public user name
      * Can be `null` if user is not accessible or it is not set
      */
-    username: string | null;
+    username?: string | null;
     /**
      * `true` if user is bot
      */

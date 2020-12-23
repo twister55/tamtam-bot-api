@@ -16,7 +16,7 @@ public class TypeProperty {
         this.name = property.name;
         this.type = property.dataType;
         this.doc = JsDocsBuilder.of(property);
-        this.required = property.required;
+        this.required = property.required && !property.isNullable;
         this.isNullable = property.isNullable;
     }
 }
