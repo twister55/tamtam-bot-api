@@ -1,3 +1,3 @@
-# Generator
+# TamTam Bot API client generator
 
-OpenAPI Generator from TamTam Bot API typescript client
+Generator for [TypeScript client library for TamTam Bot API](https://www.npmjs.com/package/tamtam-bot-api)
