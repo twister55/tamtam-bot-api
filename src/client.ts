@@ -1,3 +1,5 @@
+import * as FormData from 'form-data';
+
 export type Method = 'GET' | 'DELETE' | 'POST' | 'PUT' | 'PATCH';
 
 export interface RequestHeaders {
