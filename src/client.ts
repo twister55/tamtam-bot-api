@@ -28,7 +28,7 @@ export class ApiClient implements HttpClient {
     public readonly http: HttpClient;
 
     constructor(host: string, token: string, version: string, http: HttpClient) {
-        this.host = host.charAt(host.length - 1) === '/' ? host : host + '/';
+        this.host = host.charAt(host.length - 1) === '/' ? host.substr(0, host.length - 1) : host;
         this.token = token;
         this.version = version;
         this.http = http;
