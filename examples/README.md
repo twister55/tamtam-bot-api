@@ -9,12 +9,12 @@ npm run build
  
 To run examples you need access token. If you don't have it contact [@PrimeBot](http://tt.me/primebot)
 
-## bot-info
+## my-info
 
 Simple example that prints information about bot to console
 
 ```bash
-node bot-info.js <ACCESS_TOKEN>
+node my-info.js <ACCESS_TOKEN>
 ```
 
 ## echo

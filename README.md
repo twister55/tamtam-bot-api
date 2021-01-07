@@ -20,16 +20,12 @@ This assumes you are using [npm](https://www.npmjs.com/) as your package manager
 ## Usage
 
 ```js
-const { TamTamBotAPI } = require('tamtam-bot-api');
+const { createAPI } = require('tamtam-bot-api');
 
-const api = TamTamBotAPI.create(process.argv[2]);
-
-api.getBotInfo().then(({ user_id, name, description }) => {
-    console.log(`My bot's id is ${user_id}. My bot's name is ${name}. My bot's description is '${description}`);
-}).catch(err => {
-    console.error('Error', err.message, err.code);
-});
-
+createAPI('<BOT API TOKEN>')
+    .getMyInfo()
+    .then(console.log)
+    .catch(console.error);
 ```
 For other examples check [examples folder](https://github.com/twister55/tamtam-bot-api/tree/master/examples)
 

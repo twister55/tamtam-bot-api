@@ -5,7 +5,10 @@
     "module": "commonjs",
     "strict": true,
     "moduleResolution": "node",
-    "skipLibCheck": true
+    "skipLibCheck": true,
+    "types": [
+      "tamtam-bot-api"
+    ]
   },
   "include": [
     "./*"
