@@ -6,7 +6,6 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-import org.openapitools.codegen.CodegenConstants.ENUM_PROPERTY_NAMING_TYPE;
 import org.openapitools.codegen.CodegenModel;
 import org.openapitools.codegen.CodegenOperation;
 import org.openapitools.codegen.SupportingFile;
@@ -22,7 +21,6 @@ public class TypescriptClientCodegen extends AbstractTypeScriptClientCodegen {
         this.templateDir = getName();
         this.apiPackage = "src";
         this.modelPackage = "src/types";
-        this.outputFolder = "generated-code/tamtam-bot-api";
     }
 
     @Override
@@ -37,10 +35,9 @@ public class TypescriptClientCodegen extends AbstractTypeScriptClientCodegen {
 
     @Override
     public void processOpts() {
-        setEnumPropertyNaming(ENUM_PROPERTY_NAMING_TYPE.UPPERCASE.name());
-
-        supportingFiles.add(new SupportingFile("api.mustache", "src", "api.ts"));
-        supportingFiles.add(new SupportingFile("types.mustache", "src", "types.ts"));
+        setEnumPropertyNaming("UPPERCASE");
+        addFile("api");
+        addFile("types");
     }
 
     @Override
@@ -103,5 +100,9 @@ public class TypescriptClientCodegen extends AbstractTypeScriptClientCodegen {
             .filter(model -> !model.name.endsWith("_allOf"))
             .map(Type::new)
             .collect(Collectors.toList());
+    }
+
+    private void addFile(String name) {
+        supportingFiles.add(new SupportingFile(name + ".mustache", "src", name + ".ts"));
     }
 }
