@@ -4,6 +4,8 @@
 .idea
 *.iml
 
+node_modules
+
 types
 *.js
 *.js.map
