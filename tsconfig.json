@@ -1,16 +1,25 @@
 {
   "compilerOptions": {
     "alwaysStrict": true,
-    "target": "es5",
-    "module": "commonjs",
     "declaration": true,
-    "outDir": "./dist",
+    "declarationDir": "./types",
     "baseUrl": ".",
-    "strict": true,
+    "module": "esnext",
     "moduleResolution": "node",
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "noUnusedLocals": true,
     "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
     "strictNullChecks": true,
-    "noUnusedLocals": false,
+    "target": "es6",
+    "types": [
+      "@types/node",
+      "axios"
+    ],
     "paths": {
       "*": ["src/*"]
     },

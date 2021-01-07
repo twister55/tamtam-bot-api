@@ -1,6 +1,11 @@
-.idea
-.rpt2_cache
-dist
 .openapi-generator-ignore
 .openapi-generator
+
+.idea
 *.iml
+
+types
+*.js
+*.js.map
+*.mjs
+*.mjs.map
