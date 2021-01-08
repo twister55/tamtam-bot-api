@@ -118,12 +118,9 @@ export class TamTamBotAPI {
      *
      * @summary Get all chats
      */
-    public getChats(count?: number, marker?: number): Promise<ChatList> {
+    public getChats(params?: { count?: number; marker?: number }): Promise<ChatList> {
         return this.client.request('GET', '/chats', {
-            params: {
-                count,
-                marker
-            }
+            params
         });
     }
 
@@ -132,13 +129,9 @@ export class TamTamBotAPI {
      *
      * @summary Get members
      */
-    public getMembers(chatId: number, userIds?: number[], marker?: number, count?: number): Promise<ChatMembersList> {
+    public getMembers(chatId: number, params?: { user_ids?: number[]; marker?: number; count?: number }): Promise<ChatMembersList> {
         return this.client.request('GET', `/chats/${chatId}/members`, {
-            params: {
-                user_ids: userIds,
-                marker,
-                count
-            }
+            params
         });
     }
 
@@ -290,15 +283,9 @@ export class TamTamBotAPI {
      *
      * @summary Get messages
      */
-    public getMessages(chatId?: number, messageIds?: string[], from?: number, to?: number, count?: number): Promise<MessageList> {
+    public getMessages(params: { chat_id?: number; message_ids?: string[]; from?: number; to?: number; count?: number }): Promise<MessageList> {
         return this.client.request('GET', '/messages', {
-            params: {
-                chat_id: chatId,
-                message_ids: messageIds,
-                from,
-                to,
-                count
-            }
+            params
         });
     }
 
@@ -368,14 +355,10 @@ export class TamTamBotAPI {
      *
      * @summary Send message
      */
-    public sendMessage(data: NewMessageBody, userId?: number, chatId?: number, disableLinkPreview?: boolean): Promise<SendMessageResult> {
+    public sendMessage(data: NewMessageBody, params: { user_id?: number; chat_id?: number; disable_link_preview?: boolean }): Promise<SendMessageResult> {
         return this.client.request('POST', '/messages', {
             data,
-            params: {
-                user_id: userId,
-                chat_id: chatId,
-                disable_link_preview: disableLinkPreview
-            }
+            params
         });
     }
 
@@ -400,14 +383,9 @@ export class TamTamBotAPI {
      *
      * @summary Get updates
      */
-    public getUpdates(limit?: number, timeout?: number, marker?: number, types?: string[]): Promise<UpdateList> {
+    public getUpdates(params?: { limit?: number; timeout?: number; marker?: number; types?: string[] }): Promise<UpdateList> {
         return this.client.request('GET', '/updates', {
-            params: {
-                limit,
-                timeout,
-                marker,
-                types
-            }
+            params
         });
     }
 
