@@ -34,10 +34,10 @@ export * from 'client';
 export * from 'error';
 export * from 'types';
 
-export function createAPI(token: string): TamTamBotAPI;
-export function createAPI(token: string, host?: string): TamTamBotAPI;
-export function createAPI(token: string, client?: HttpClient): TamTamBotAPI;
-export function createAPI(token: string, host?: string, client?: HttpClient): TamTamBotAPI;
+export function createAPI(token?: string): TamTamBotAPI;
+export function createAPI(token?: string, host?: string): TamTamBotAPI;
+export function createAPI(token?: string, client?: HttpClient): TamTamBotAPI;
+export function createAPI(token?: string, host?: string, client?: HttpClient): TamTamBotAPI;
 export function createAPI(token: string = TOKEN, hostOrClient: string | HttpClient = HOST, httpClient?: HttpClient): TamTamBotAPI {
     if (!token) {
         throw new ApiError('Access token required', 'init', 'token.error');
