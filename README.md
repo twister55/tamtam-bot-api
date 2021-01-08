@@ -1,6 +1,7 @@
 # TamTam Bot API
 
 [![Bot API](https://img.shields.io/badge/TamTam%20Bot%20API-v0.2.0-blue)](https://dev.tamtam.chat)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftwister55%2Ftamtam-bot-api.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftwister55%2Ftamtam-bot-api?ref=badge_shield)
 
 ## Requirements
 To use TamTam Bot API you should obtain `ACCESS_TOKEN` for each bot you create.
@@ -36,3 +37,6 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 ## License
 
 This project is licensed under the [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftwister55%2Ftamtam-bot-api.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Ftwister55%2Ftamtam-bot-api?ref=badge_large)
