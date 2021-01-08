@@ -22,7 +22,7 @@ This assumes you are using [npm](https://www.npmjs.com/) as your package manager
 ```js
 const { createAPI } = require('tamtam-bot-api');
 
-createAPI('<BOT API TOKEN>')
+createAPI(/* BOT API TOKEN */)
     .getMyInfo()
     .then(console.log)
     .catch(console.error);
