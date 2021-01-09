@@ -31,9 +31,9 @@ api.getUploadUrl(UploadType.IMAGE)
                     }
                 }))
             },
-            Number(process.argv[3])
+            {
+                user_id: Number(process.argv[3])
+            }
         );
     })
-    .catch(({ code, message }) => {
-        console.log('Error', code, message);
-    });
+    .catch(console.error);

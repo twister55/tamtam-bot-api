@@ -5,19 +5,14 @@ const api = createAPI(process.argv[2]);
 let MARKER = 0;
 
 function startPolling() {
-    api.getUpdates(100, 30000, MARKER).then(({ updates, marker }) => {
+    api.getUpdates({ marker: MARKER }).then(({ updates, marker }) => {
         MARKER = marker || MARKER;
 
         updates.forEach((update: Update) => {
             if (update.update_type === 'message_created') {
-                api.sendMessage(
-                    {
-                        text: update.message.body?.text,
-                        attachments: null,
-                        link: null
-                    },
-                    update.message.sender?.user_id
-                );
+                const { body, sender } = update.message;
+
+                api.sendMessage({ text: body?.text }, sender?.user_id);
             }
         });
 
