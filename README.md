@@ -67,7 +67,7 @@ function startPolling() {
             if (update.update_type === 'message_created') {
                 const { body, sender } = update.message;
 
-                api.sendMessage({ text: body?.text }, sender?.user_id);
+                api.sendMessage({ text: body?.text }, { user_id: sender?.user_id });
             }
         });
 
