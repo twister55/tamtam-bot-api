@@ -1,11 +1,18 @@
 # TamTam Bot API
 
-[![Bot API](https://img.shields.io/badge/TamTam%20Bot%20API-v0.2.0-blue)](https://dev.tamtam.chat)
+[![Bot API](https://img.shields.io/badge/TamTam%20Bot%20API-v0.3.0-blue)](https://dev.tamtam.chat)
+[![TamTam channel](https://img.shields.io/badge/Official%20channel-gray)](https://tt.me/botapichannel)
+[![NPM download](https://img.shields.io/npm/dt/tamtam-bot-api?style=flat)](https://www.npmjs.com/package/tamtam-bot-api)
+[![NPM version](https://img.shields.io/npm/v/tamtam-bot-api?style=flat)](https://www.npmjs.com/package/tamtam-bot-api)
+[![Minzipped size](https://img.shields.io/bundlephobia/minzip/tamtam-bot-api?style=flat)](https://bundlephobia.com/result?p=tamtam-bot-api)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftwister55%2Ftamtam-bot-api.svg?type=shield)](https://github.com/twister55/tamtam-bot-api/blob/master/LICENSE)
+
+Lightweight tree-shakable customizable module to interact with TamTam Bot API with full Typescript support 
 
 ## Requirements
-To use TamTam Bot API you should obtain `ACCESS_TOKEN` for each bot you create.
+To use TamTam Bot API you should obtain `ACCESS_TOKEN` for each bot you create
 
-Talk to [@PrimeBot](http://tt.me/primebot). It will helps you to create your first bot.
+Interact with [@PrimeBot](http://tt.me/primebot) to create your first bot
 
 ## Install
 
@@ -19,6 +26,8 @@ This assumes you are using [npm](https://www.npmjs.com/) as your package manager
 
 ## Usage
 
+To make your first request just provide API token to `createAPI` function or set `TAMTAM_API_TOKEN` env variable
+
 ```js
 const { createAPI } = require('tamtam-bot-api');
 
@@ -27,6 +36,49 @@ createAPI(/* BOT API TOKEN */)
     .then(console.log)
     .catch(console.error);
 ```
+## HTTP Library
+
+Default version uses [axios](https://www.npmjs.com/package/axios) to make HTTP requests
+
+If you are using other HTTP library you can run
+ 
+```bash
+npm install --save --no-optional tamtam-bot-api
+```
+
+Then provide your own http implementation to `createAPI` function
+
+## Echo bot example
+
+A Simple bot that will respond to your messages with the same text using polling of `getUpdates` method
+
+```typescript
+import { createAPI, Update } from 'tamtam-bot-api';
+
+const api = createAPI();
+
+let MARKER = 0;
+
+function startPolling() {
+    api.getUpdates({ marker: MARKER }).then(({ updates, marker }) => {
+        MARKER = marker || MARKER;
+
+        updates.forEach((update: Update) => {
+            if (update.update_type === 'message_created') {
+                const { body, sender } = update.message;
+
+                api.sendMessage({ text: body?.text }, sender?.user_id);
+            }
+        });
+
+        startPolling();
+    });
+}
+
+startPolling();
+
+```
+
 For other examples check [examples folder](https://github.com/twister55/tamtam-bot-api/tree/master/examples)
 
 ## Contributing
@@ -35,4 +87,4 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 ## License
 
-This project is licensed under the [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+This project licensed under the [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0).
