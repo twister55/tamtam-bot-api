@@ -1,10 +1,10 @@
 # TamTam Bot API
 
-[![Bot API](https://img.shields.io/badge/TamTam%20Bot%20API-v0.3.0-blue)](https://dev.tamtam.chat)
-[![TamTam channel](https://img.shields.io/badge/Official%20channel-gray)](https://tt.me/botapichannel)
+[![Build Status](https://travis-ci.com/twister55/tamtam-bot-api.svg?branch=master)](https://travis-ci.com/twister55/tamtam-bot-api)
 [![NPM download](https://img.shields.io/npm/dt/tamtam-bot-api?style=flat)](https://www.npmjs.com/package/tamtam-bot-api)
 [![NPM version](https://img.shields.io/npm/v/tamtam-bot-api?style=flat)](https://www.npmjs.com/package/tamtam-bot-api)
 [![Minzipped size](https://img.shields.io/bundlephobia/minzip/tamtam-bot-api?style=flat)](https://bundlephobia.com/result?p=tamtam-bot-api)
+[![Bot API](https://img.shields.io/badge/TamTam%20Bot%20API-v0.3.0-blue)](https://dev.tamtam.chat)
 [![LICENSE](https://img.shields.io/npm/l/tamtam-bot-api?type=flat)](https://github.com/twister55/tamtam-bot-api/blob/master/LICENSE)
 
 Lightweight tree-shakable customizable module to interact with TamTam Bot API with full Typescript support 
