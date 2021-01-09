@@ -5,7 +5,7 @@
 [![NPM download](https://img.shields.io/npm/dt/tamtam-bot-api?style=flat)](https://www.npmjs.com/package/tamtam-bot-api)
 [![NPM version](https://img.shields.io/npm/v/tamtam-bot-api?style=flat)](https://www.npmjs.com/package/tamtam-bot-api)
 [![Minzipped size](https://img.shields.io/bundlephobia/minzip/tamtam-bot-api?style=flat)](https://bundlephobia.com/result?p=tamtam-bot-api)
-[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Ftwister55%2Ftamtam-bot-api.svg?type=shield)](https://github.com/twister55/tamtam-bot-api/blob/master/LICENSE)
+[![LICENSE](https://img.shields.io/npm/l/tamtam-bot-api?type=flat)](https://github.com/twister55/tamtam-bot-api/blob/master/LICENSE)
 
 Lightweight tree-shakable customizable module to interact with TamTam Bot API with full Typescript support 
 
