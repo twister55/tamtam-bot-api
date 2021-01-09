@@ -12,6 +12,6 @@
   },
   "dependencies": {
     "form-data": "^3.0.0",
-    "tamtam-bot-api": "^0.3.0"
+    "tamtam-bot-api": "^0.3.1"
   }
 }
