@@ -10,6 +10,7 @@
 Lightweight tree-shakable customizable module to interact with TamTam Bot API with full Typescript support 
 
 ## Requirements
+
 To use TamTam Bot API you should obtain `ACCESS_TOKEN` for each bot you create
 
 Interact with [@PrimeBot](http://tt.me/primebot) to create your first bot
@@ -31,11 +32,12 @@ To make your first request just provide API token to `createAPI` function or set
 ```js
 const { createAPI } = require('tamtam-bot-api');
 
-createAPI(/* BOT API TOKEN */)
+createAPI(/* TAMTAM_API_TOKEN */)
     .getMyInfo()
     .then(console.log)
     .catch(console.error);
 ```
+
 ## HTTP Library
 
 Default version uses [axios](https://www.npmjs.com/package/axios) to make HTTP requests
@@ -55,7 +57,7 @@ A Simple bot that will respond to your messages with the same text using polling
 ```typescript
 import { createAPI, Update } from 'tamtam-bot-api';
 
-const api = createAPI();
+const api = createAPI(/* TAMTAM_API_TOKEN */);
 
 let MARKER = 0;
 
@@ -76,10 +78,9 @@ function startPolling() {
 }
 
 startPolling();
-
 ```
 
-For other examples check [examples folder](https://github.com/twister55/tamtam-bot-api/tree/master/examples)
+You can play with example on RunKit: [long polling](https://runkit.com/twister55/tamtam-echo-bot), [web hook endpoint](https://runkit.com/twister55/tamtam-echo-bot-web-hook)
 
 ## Contributing
 
