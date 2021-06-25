@@ -61,6 +61,10 @@ export interface BotAddedToChatUpdate {
      * User who added bot to chat
      */
     user: User;
+    /**
+     * Indicates whether bot has been added to channel or not
+     */
+    is_channel: boolean;
 }
 
 export interface BotCommand {
@@ -92,6 +96,11 @@ export interface BotInfo {
      * `true` if user is bot
      */
     is_bot: boolean;
+    /**
+     * Time of last user activity in TamTam (Unix timestamp in milliseconds)
+     * Can be outdated if user disabled its "online" status in settings
+     */
+    last_activity_time: number;
     /**
      * User description
      * Can be `null` if user did not fill it out
@@ -154,6 +163,10 @@ export interface BotRemovedFromChatUpdate {
      * User who removed bot from chat
      */
     user: User;
+    /**
+     * Indicates whether bot has been removed from channel or not
+     */
+    is_channel: boolean;
 }
 
 /**
@@ -307,7 +320,7 @@ export interface Chat {
      */
     is_public: boolean;
     /**
-     * Link on chat if it is public
+     * Link on chat
      */
     link?: string | null;
     /**
@@ -410,6 +423,11 @@ export interface ChatMember {
      */
     is_bot: boolean;
     /**
+     * Time of last user activity in TamTam (Unix timestamp in milliseconds)
+     * Can be outdated if user disabled its "online" status in settings
+     */
+    last_activity_time: number;
+    /**
      * User description
      * Can be `null` if user did not fill it out
      */
@@ -422,7 +440,10 @@ export interface ChatMember {
      * URL of avatar of a bigger size
      */
     full_avatar_url?: string;
-
+    /**
+     * User last activity time in chat
+     * Can be outdated for super chats and channels (equals to `join_time`)
+     */
     last_access_time: number;
 
     is_owner: boolean;
@@ -532,6 +553,27 @@ export interface ConstructedMessage {
     body: MessageBody;
 }
 
+export interface ConstructedMessageBody {
+    /**
+     * Message text
+     */
+    text?: string | null;
+    /**
+     * Message attachments
+     * See `AttachmentRequest` and it's inheritors for full information
+     */
+    attachments?: AttachmentRequest[] | null;
+    /**
+     * Text markup
+     */
+    markup?: MarkupElement[] | null;
+    /**
+     * Message text format
+     * If set,
+     */
+    format?: TextFormat | null;
+}
+
 /**
  * Bot's answer on construction request
  */
@@ -540,7 +582,7 @@ export interface ConstructorAnswer {
      * Array of prepared messages
      * This messages will be sent as user taps on "Send" button
      */
-    messages?: NewMessageBody[];
+    messages?: ConstructedMessageBody[];
     /**
      * If `true` user can send any input manually
      * Otherwise, only keyboard will be shown
@@ -619,6 +661,25 @@ export interface ContactAttachmentRequestPayload {
     vcf_phone?: string | null;
 }
 
+/**
+ * Represents *italic* in text
+ */
+export interface EmphasizedMarkup {
+    /**
+     * Type of the markup element
+     * Can be **strong**, *emphasized*, ~strikethrough~, ++underline++, `monospaced`, link or user_mention
+     */
+    type: 'emphasized';
+    /**
+     * Element start index (zero-based) in text
+     */
+    from: number;
+    /**
+     * Length of the markup element
+     */
+    length: number;
+}
+
 export interface FileAttachment {
     type: 'file';
 
@@ -670,6 +731,44 @@ export interface GetSubscriptionsResult {
      * Current subscriptions
      */
     subscriptions: Subscription[];
+}
+
+/**
+ * Represents header part of the text
+ */
+export interface HeadingMarkup {
+    /**
+     * Type of the markup element
+     * Can be **strong**, *emphasized*, ~strikethrough~, ++underline++, `monospaced`, link or user_mention
+     */
+    type: 'heading';
+    /**
+     * Element start index (zero-based) in text
+     */
+    from: number;
+    /**
+     * Length of the markup element
+     */
+    length: number;
+}
+
+/**
+ * Represents a highlighted piece of text
+ */
+export interface HighlightedMarkup {
+    /**
+     * Type of the markup element
+     * Can be **strong**, *emphasized*, ~strikethrough~, ++underline++, `monospaced`, link or user_mention
+     */
+    type: 'highlighted';
+    /**
+     * Element start index (zero-based) in text
+     */
+    from: number;
+    /**
+     * Length of the markup element
+     */
+    length: number;
 }
 
 /**
@@ -736,6 +835,29 @@ export interface LinkButton {
     url: string;
 }
 
+/**
+ * Represents link in text
+ */
+export interface LinkMarkup {
+    /**
+     * Type of the markup element
+     * Can be **strong**, *emphasized*, ~strikethrough~, ++underline++, `monospaced`, link or user_mention
+     */
+    type: 'link';
+    /**
+     * Element start index (zero-based) in text
+     */
+    from: number;
+    /**
+     * Length of the markup element
+     */
+    length: number;
+    /**
+     * Link's URL
+     */
+    url: string;
+}
+
 export interface LinkedMessage {
     /**
      * Type of linked message
@@ -773,6 +895,8 @@ export interface LocationAttachmentRequest {
 
     longitude: number;
 }
+
+export type MarkupElement = StrongMarkup | EmphasizedMarkup | MonospacedMarkup | LinkMarkup | StrikethroughMarkup | UnderlineMarkup | UserMentionMarkup | HeadingMarkup | HighlightedMarkup;
 
 export interface MediaAttachmentPayload {
     /**
@@ -851,6 +975,11 @@ export interface MessageBody {
      * See description of this schema
      */
     attachments?: Attachment[] | null;
+    /**
+     * Message text markup
+     * See [Formatting](#section/About/Text-formatting) section for more info
+     */
+    markup?: MarkupElement[] | null;
 }
 
 /**
@@ -959,7 +1088,7 @@ export interface MessageConstructorInput {
      * Typically it is single element array but sometimes it can contains multiple messages
      * Can be empty on initial request when user just opened constructor
      */
-    messages?: NewMessageBody[] | null;
+    messages?: ConstructedMessageBody[] | null;
 }
 
 /**
@@ -1045,6 +1174,25 @@ export interface MessageStat {
     views: number;
 }
 
+/**
+ * Represents `monospaced` or ```code``` block in text
+ */
+export interface MonospacedMarkup {
+    /**
+     * Type of the markup element
+     * Can be **strong**, *emphasized*, ~strikethrough~, ++underline++, `monospaced`, link or user_mention
+     */
+    type: 'monospaced';
+    /**
+     * Element start index (zero-based) in text
+     */
+    from: number;
+    /**
+     * Length of the markup element
+     */
+    length: number;
+}
+
 export interface NewMessageBody {
     /**
      * Message text
@@ -1063,6 +1211,10 @@ export interface NewMessageBody {
      * If false, chat participants would not be notified
      */
     notify?: boolean;
+    /**
+     * If set, message text will be formated according to given markup
+     */
+    format?: TextFormat | null;
 }
 
 export interface NewMessageLink {
@@ -1326,6 +1478,44 @@ export interface StickerAttachmentRequestPayload {
 }
 
 /**
+ * Represents ~strikethrough~ block in text
+ */
+export interface StrikethroughMarkup {
+    /**
+     * Type of the markup element
+     * Can be **strong**, *emphasized*, ~strikethrough~, ++underline++, `monospaced`, link or user_mention
+     */
+    type: 'strikethrough';
+    /**
+     * Element start index (zero-based) in text
+     */
+    from: number;
+    /**
+     * Length of the markup element
+     */
+    length: number;
+}
+
+/**
+ * Represents **bold** in text
+ */
+export interface StrongMarkup {
+    /**
+     * Type of the markup element
+     * Can be **strong**, *emphasized*, ~strikethrough~, ++underline++, `monospaced`, link or user_mention
+     */
+    type: 'strong';
+    /**
+     * Element start index (zero-based) in text
+     */
+    from: number;
+    /**
+     * Length of the markup element
+     */
+    length: number;
+}
+
+/**
  * Schema to describe WebHook subscription
  */
 export interface Subscription {
@@ -1364,6 +1554,33 @@ export interface SubscriptionRequestBody {
      * Affects model representation
      */
     version?: string;
+}
+
+/**
+ * Message text format
+ */
+export const enum TextFormat {
+    MARKDOWN = 'markdown',
+    HTML = 'html'
+}
+
+/**
+ * Represents ++underlined++ part of the text
+ */
+export interface UnderlineMarkup {
+    /**
+     * Type of the markup element
+     * Can be **strong**, *emphasized*, ~strikethrough~, ++underline++, `monospaced`, link or user_mention
+     */
+    type: 'underline';
+    /**
+     * Element start index (zero-based) in text
+     */
+    from: number;
+    /**
+     * Length of the markup element
+     */
+    length: number;
 }
 
 /**
@@ -1447,6 +1664,11 @@ export interface User {
      * `true` if user is bot
      */
     is_bot: boolean;
+    /**
+     * Time of last user activity in TamTam (Unix timestamp in milliseconds)
+     * Can be outdated if user disabled its "online" status in settings
+     */
+    last_activity_time: number;
 }
 
 /**
@@ -1471,10 +1693,42 @@ export interface UserAddedToChatUpdate {
      * Can be `null` in case when user joined chat by link
      */
     inviter_id?: number | null;
+    /**
+     * Indicates whether user has been added to channel or not
+     */
+    is_channel: boolean;
 }
 
 export interface UserIdsList {
     user_ids: number[];
+}
+
+/**
+ * Represents user mention in text
+ * Mention can be both by user's username or ID if user doesn't have username
+ */
+export interface UserMentionMarkup {
+    /**
+     * Type of the markup element
+     * Can be **strong**, *emphasized*, ~strikethrough~, ++underline++, `monospaced`, link or user_mention
+     */
+    type: 'user_mention';
+    /**
+     * Element start index (zero-based) in text
+     */
+    from: number;
+    /**
+     * Length of the markup element
+     */
+    length: number;
+    /**
+     * `@username` of mentioned user
+     */
+    user_link?: string | null;
+    /**
+     * Identifier of mentioned user without username
+     */
+    user_id?: number | null;
 }
 
 /**
@@ -1499,6 +1753,10 @@ export interface UserRemovedFromChatUpdate {
      * Can be `null` in case when user left chat
      */
     admin_id?: number;
+    /**
+     * Indicates whether user has been removed from channel or not
+     */
+    is_channel: boolean;
 }
 
 export interface UserWithPhoto {
@@ -1519,6 +1777,11 @@ export interface UserWithPhoto {
      * `true` if user is bot
      */
     is_bot: boolean;
+    /**
+     * Time of last user activity in TamTam (Unix timestamp in milliseconds)
+     * Can be outdated if user disabled its "online" status in settings
+     */
+    last_activity_time: number;
     /**
      * User description
      * Can be `null` if user did not fill it out

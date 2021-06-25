@@ -29,13 +29,13 @@ import {
  * TamTam Bot API
  *
  * @see https://dev.tamtam.chat
- * @version 0.3.0
+ * @version 0.5.3
  */
 export class TamTamBotAPI {
     public readonly client: ApiClient;
 
     constructor(token: string, host: string, client: HttpClient) {
-        this.client = new ApiClient(host, token, '0.3.0', client);
+        this.client = new ApiClient(host, token, '0.5.3', client);
     }
 
     /**
