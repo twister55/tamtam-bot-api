@@ -1,6 +1,6 @@
 {
   "name": "tamtam-bot-api",
-  "version": "0.3.2",
+  "version": "0.5.3",
   "description": "TamTam Bot API",
   "module": "index.mjs",
   "main": "index",
