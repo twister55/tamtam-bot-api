@@ -12,7 +12,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <openapi-generator-version>4.3.1</openapi-generator-version>
+        <openapi-generator-version>5.1.0</openapi-generator-version>
         <maven-plugin-version>1.0.0</maven-plugin-version>
         <junit-version>4.13.1</junit-version>
     </properties>
@@ -32,7 +32,7 @@
         <dependency>
             <groupId>org.openapitools</groupId>
             <artifactId>openapi-generator</artifactId>
-            <version>4.3.1</version>
+            <version>5.1.0</version>
             <scope>compile</scope>
         </dependency>
     </dependencies>
